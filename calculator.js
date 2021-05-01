@@ -36,6 +36,7 @@ operatorButtons.forEach((button) =>
 // append functions
 function appendNumber(number) {
     if (screen.textContent === "0" || shouldResetScreen) resetScreen();
+    if (result.textContent === "0" || shouldResetScreen) resetResult();
     screen.textContent += number;
     result.textContent += number;
 }
@@ -44,8 +45,8 @@ function appendPoint() {
     if (shouldResetScreen) resetScreen();
     if (screen.textContent === "") screen.textContent = "0";
     if (screen.textContent.includes(point.textContent)) return;
+    if (screen.textContent === "" || screen.textContent === "0") result.textContent += "0";
     screen.textContent += point.textContent;
-    if (result.textContent === "") result.textContent = "0";
     result.textContent += point.textContent;
 }
 
@@ -97,6 +98,9 @@ function resetScreen() {
     screen.textContent = "";
 }
 
+function resetResult() {
+    result.textContent = "";
+}
 // delete
 function deleteNumber() {
     screen.textContent = screen.textContent.toString().slice(0, -1);
