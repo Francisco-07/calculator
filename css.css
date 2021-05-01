@@ -52,3 +52,11 @@
     background-color: aqua;
   }
 
+.opacity {
+  color: transparent;
+}
+
+.invisible {
+  display: none;
+  visibility: hidden;
+}

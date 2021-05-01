@@ -1,7 +1,7 @@
 // selectors
 const numberButtons = document.querySelectorAll("[data-number]");
 const screen = document.querySelector("[data-screen]");
-const last = document.querySelector("[data-last]");
+const result = document.querySelector("[data-result]");
 const clearOperations = document.querySelector("[data-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
@@ -13,6 +13,8 @@ let firstOperand = "";
 let secondOperand = "";
 let currentOperation = null;
 let shouldResetScreen = false;
+
+
 
 // event listeners
 deleteButton.addEventListener("click", deleteNumber);
@@ -35,6 +37,7 @@ operatorButtons.forEach((button) =>
 function appendNumber(number) {
     if (screen.textContent === "0" || shouldResetScreen) resetScreen();
     screen.textContent += number;
+    result.textContent += number;
 }
 
 function appendPoint() {
@@ -42,6 +45,8 @@ function appendPoint() {
     if (screen.textContent === "") screen.textContent = "0";
     if (screen.textContent.includes(point.textContent)) return;
     screen.textContent += point.textContent;
+    if (result.textContent === "") result.textContent = "0";
+    result.textContent += point.textContent;
 }
 
 // set operation and evaluate
@@ -51,6 +56,7 @@ function setOperation(operator) {
     firstOperand = screen.textContent;
     currentOperation = operator;
     shouldResetScreen = true;
+    result.textContent += currentOperation;
 }
 
 function evaluate() {
@@ -61,14 +67,20 @@ function evaluate() {
         return;
     }
     secondOperand = screen.textContent;
+
     screen.textContent = roundResult(
         operate(currentOperation, firstOperand, secondOperand)
     );
+    result.textContent = roundResult(
+        operate(currentOperation, firstOperand, secondOperand)
+    );
+    // result.textContent = firstOperand += currentOperation += secondOperand;
     currentOperation = null;
 }
 
 function roundResult(number) {
     return Math.round(number * 1000) / 1000;
+
 }
 
 // reset
@@ -77,6 +89,7 @@ function clear() {
     firstOperand = "";
     secondOperand = "";
     currentOperation = null;
+    result.textContent = ""
 }
 
 function resetScreen() {
