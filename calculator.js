@@ -43,9 +43,8 @@ function appendNumber(number) {
 
 function appendPoint() {
     if (shouldResetScreen) resetScreen();
-    if (screen.textContent === "") screen.textContent = "0";
+    if (screen.textContent === "") screen.textContent = "0", result.textContent += "0";
     if (screen.textContent.includes(point.textContent)) return;
-    if (screen.textContent === "") result.textContent += "0";
     screen.textContent += point.textContent;
     result.textContent += point.textContent;
 }
@@ -90,7 +89,7 @@ function clear() {
     firstOperand = "";
     secondOperand = "";
     currentOperation = null;
-    result.textContent = ""
+    result.textContent = "0"
 }
 
 function resetScreen() {
@@ -104,6 +103,7 @@ function resetResult() {
 // delete
 function deleteNumber() {
     screen.textContent = screen.textContent.toString().slice(0, -1);
+    result.textContent = result.textContent.toString().slice(0, -1);
 }
 
 
