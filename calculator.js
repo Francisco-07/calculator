@@ -45,7 +45,7 @@ function appendPoint() {
     if (shouldResetScreen) resetScreen();
     if (screen.textContent === "") screen.textContent = "0";
     if (screen.textContent.includes(point.textContent)) return;
-    if (screen.textContent === "" || screen.textContent === "0") result.textContent += "0";
+    if (screen.textContent === "") result.textContent += "0";
     screen.textContent += point.textContent;
     result.textContent += point.textContent;
 }
